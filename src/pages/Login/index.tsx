@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { View, 
-         Text, 
-         Image, 
-         TextInput, 
-         TouchableOpacity, 
-         ActivityIndicator } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator
+} from 'react-native';
 import Logo from '../../assets/logo.png';
 import { createStyles } from './styles';
 import { useTheme } from '../../global/themes';
@@ -26,10 +28,10 @@ export default function LoginScreen() {
     setIsLoading(true);
     setErrorMessage('');
 
-    try{
-      const isValid = validateLogin(email.trim().toLowerCase(), 
-                                    password.trim());
-      if(!isValid){
+    try {
+      const isValid = validateLogin(email.trim().toLowerCase(),
+        password.trim());
+      if (!isValid) {
         setErrorMessage('E-mail ou senha inválidos');
         setIsLoading(false);
         setPassword('');
@@ -38,7 +40,7 @@ export default function LoginScreen() {
 
       navigation.reset({
         index: 0,
-        routes: [{ name: 'PokemonList'}]
+        routes: [{ name: 'PokemonList' }]
       })
     } catch (error) {
       setErrorMessage('Ocorreu um erro ao validar o login');
@@ -54,45 +56,51 @@ export default function LoginScreen() {
       <View style={styles.boxTop}>
         <Image source={Logo} style={styles.logo} />
         <Text style={styles.textTop}>Pokédex</Text>
+        <Text style={{ color: theme.colors.textSecondary }}>
+          Turma DS - ETE · Fred
+        </Text>
       </View>
-      
+
       <View style={styles.boxMid}>
-      <Text style={styles.titleInput}>E-mail</Text>
-      <View style={styles.boxInput}>
-      <TextInput
-          value={email}
-          onChangeText={setEmail}
-          placeholder="seuemail@exemplo.com"
-          keyboardType="email-address"
-          autoCapitalize="none"
-          style={styles.textInput}
-        />
-      </View>
-      <Text style={styles.titleInput}>Senha</Text>      
-      <View style={styles.boxInput}>
-      <TextInput
-          value={password}
-          onChangeText={setPassword}
-          placeholder="********"
-          secureTextEntry
-          style={styles.textInput}
-        />
-      </View>        
+        <Text style={styles.titleInput}>E-mail</Text>
+        <View style={styles.boxInput}>
+          <TextInput
+            value={email}
+            onChangeText={setEmail}
+            placeholder="seuemail@exemplo.com"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            style={styles.textInput}
+          />
+        </View>
+        <Text>
+          Você digitou: {email} ({email.length} letras)
+        </Text>
+        <Text style={styles.titleInput}>Senha</Text>
+        <View style={styles.boxInput}>
+          <TextInput
+            value={password}
+            onChangeText={setPassword}
+            placeholder="********"
+            secureTextEntry
+            style={styles.textInput}
+          />
+        </View>
       </View>
       <View style={styles.boxBottom}>
-      <TouchableOpacity 
-        style={[styles.buttonEntrar, isButtonDisabled && {opacity: 0.2}]} 
-        onPress={handleLogin}
-        disabled={isButtonDisabled}
+        <TouchableOpacity
+          style={[styles.buttonEntrar, isButtonDisabled && { opacity: 0.2 }]}
+          onPress={handleLogin}
+          disabled={isButtonDisabled}
         >
-          { isLoading ? 
-          <ActivityIndicator color={theme.colors.text}/> :
-          <Text style={styles.buttonEntrarText}>Entrar</Text>
-          }          
+          {isLoading ?
+            <ActivityIndicator color={theme.colors.text} /> :
+            <Text style={styles.buttonEntrarText}>Entrar</Text>
+          }
         </TouchableOpacity>
-        {errorMessage ? 
-          <Text style={{color: 'red', marginTop: 8}}>{errorMessage}</Text> 
-          : null 
+        {errorMessage ?
+          <Text style={{ color: 'red', marginTop: 8 }}>{errorMessage}</Text>
+          : null
         }
       </View>
     </View>
