@@ -4,25 +4,28 @@ import LoginScreen from '../pages/Login';
 import PokemonListScreen from '../pages/PokemonList';
 import PokemonDetailScreen from '../pages/PokemonDetail';
 import PokemonCameraScreen from '../pages/PokemonCamera';
+import AboutScreen from '../pages/About';
 
 export type RootStackParamList = {
     Login: undefined;
     PokemonList: undefined;
-    PokemonDetail: {id: number};
-    PokemonCamera: {id: number};
+    PokemonDetail: { id: number };
+    PokemonCamera: { id: number };
+    About: undefined;
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function AppNavigator() {
     return (
-        <Stack.Navigator 
+        <Stack.Navigator
             initialRouteName="Login"
-            screenOptions={{ headerShown: false}}>
-            <Stack.Screen name="Login" component={LoginScreen}/>
-            <Stack.Screen name="PokemonList" component={PokemonListScreen}/>
-            <Stack.Screen name="PokemonDetail" component={PokemonDetailScreen}/>
-            <Stack.Screen name="PokemonCamera" component={PokemonCameraScreen}/>
+            screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="PokemonList" component={PokemonListScreen} />
+            <Stack.Screen name="PokemonDetail" component={PokemonDetailScreen} />
+            <Stack.Screen name="PokemonCamera" component={PokemonCameraScreen} />
+            <Stack.Screen name="About" component={AboutScreen} options={{headerShown: true, title: 'Sobre'}} />
         </Stack.Navigator>
     )
 }
